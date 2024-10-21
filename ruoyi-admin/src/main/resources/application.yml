@@ -111,6 +111,8 @@ pagehelper:
   helperDialect: mysql
   supportMethodsArguments: true
   params: count=countSql
+  auto-dialect: true
+  auto-runtime-dialect: true
 
 # Swagger配置
 swagger:

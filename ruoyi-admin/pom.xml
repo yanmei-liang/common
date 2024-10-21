@@ -37,11 +37,11 @@
             <version>1.6.2</version>
         </dependency>
 
-         <!-- Mysql驱动包 -->
-<!--        <dependency>-->
-<!--            <groupId>mysql</groupId>-->
-<!--            <artifactId>mysql-connector-java</artifactId>-->
-<!--        </dependency>-->
+<!--          Mysql驱动包-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
 
         <!-- 核心模块-->
         <dependency>

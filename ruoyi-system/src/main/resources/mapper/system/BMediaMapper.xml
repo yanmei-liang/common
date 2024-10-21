@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BMediaMapper">
+    
+    <resultMap type="BMedia" id="BMediaResult">
+        <result property="id"    column="id"    />
+        <result property="type"    column="type"    />
+        <result property="name"    column="name"    />
+        <result property="author"    column="author"    />
+        <result property="area"    column="area"    />
+        <result property="mainimg"    column="mainimg"    />
+        <result property="content"    column="content"    />
+        <result property="isshow"    column="isshow"    />
+        <result property="createuer"    column="createuer"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="isdel"    column="isdel"    />
+    </resultMap>
+
+    <sql id="selectBMediaVo">
+        select id, type, name, author, area, mainimg, content, isshow, createuer, createtime, isdel from b_media
+    </sql>
+
+    <select id="selectBMediaList" parameterType="BMedia" resultMap="BMediaResult">
+        <include refid="selectBMediaVo"/>
+        <where>  
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="author != null  and author != ''"> and author = #{author}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="mainimg != null  and mainimg != ''"> and mainimg = #{mainimg}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="isshow != null "> and isshow = #{isshow}</if>
+            <if test="createuer != null  and createuer != ''"> and createuer = #{createuer}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="isdel != null "> and isdel = #{isdel}</if>
+        </where>
+    </select>
+    
+    <select id="selectBMediaById" parameterType="Long" resultMap="BMediaResult">
+        <include refid="selectBMediaVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBMedia" parameterType="BMedia" useGeneratedKeys="true" keyProperty="id">
+        insert into b_media
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="type != null">type,</if>
+            <if test="name != null">name,</if>
+            <if test="author != null">author,</if>
+            <if test="area != null">area,</if>
+            <if test="mainimg != null">mainimg,</if>
+            <if test="content != null">content,</if>
+            <if test="isshow != null">isshow,</if>
+            <if test="createuer != null">createuer,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="isdel != null">isdel,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="type != null">#{type},</if>
+            <if test="name != null">#{name},</if>
+            <if test="author != null">#{author},</if>
+            <if test="area != null">#{area},</if>
+            <if test="mainimg != null">#{mainimg},</if>
+            <if test="content != null">#{content},</if>
+            <if test="isshow != null">#{isshow},</if>
+            <if test="createuer != null">#{createuer},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="isdel != null">#{isdel},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBMedia" parameterType="BMedia">
+        update b_media
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="type != null">type = #{type},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="author != null">author = #{author},</if>
+            <if test="area != null">area = #{area},</if>
+            <if test="mainimg != null">mainimg = #{mainimg},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="isshow != null">isshow = #{isshow},</if>
+            <if test="createuer != null">createuer = #{createuer},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="isdel != null">isdel = #{isdel},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBMediaById" parameterType="Long">
+        delete from b_media where id = #{id}
+    </delete>
+
+    <delete id="deleteBMediaByIds" parameterType="String">
+        delete from b_media where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

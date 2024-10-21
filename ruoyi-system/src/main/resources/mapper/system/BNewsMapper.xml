@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BNewsMapper">
+    
+    <resultMap type="BNews" id="BNewsResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="resource"    column="resource"    />
+        <result property="resourceurl"    column="resourceurl"    />
+        <result property="content"    column="content"    />
+        <result property="isshow"    column="isshow"    />
+        <result property="createuer"    column="createuer"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="isdel"    column="isdel"    />
+    </resultMap>
+
+    <sql id="selectBNewsVo">
+        select id, title, resource, resourceurl, content, isshow, createuer, createtime, isdel from b_news
+    </sql>
+
+    <select id="selectBNewsList" parameterType="BNews" resultMap="BNewsResult">
+        <include refid="selectBNewsVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="resource != null  and resource != ''"> and resource = #{resource}</if>
+            <if test="resourceurl != null  and resourceurl != ''"> and resourceurl = #{resourceurl}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="isshow != null  and isshow != ''"> and isshow = #{isshow}</if>
+            <if test="createuer != null  and createuer != ''"> and createuer = #{createuer}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="isdel != null "> and isdel = #{isdel}</if>
+        </where>
+    </select>
+    
+    <select id="selectBNewsById" parameterType="Long" resultMap="BNewsResult">
+        <include refid="selectBNewsVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBNews" parameterType="BNews" useGeneratedKeys="true" keyProperty="id">
+        insert into b_news
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null">title,</if>
+            <if test="resource != null">resource,</if>
+            <if test="resourceurl != null">resourceurl,</if>
+            <if test="content != null">content,</if>
+            <if test="isshow != null">isshow,</if>
+            <if test="createuer != null">createuer,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="isdel != null">isdel,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null">#{title},</if>
+            <if test="resource != null">#{resource},</if>
+            <if test="resourceurl != null">#{resourceurl},</if>
+            <if test="content != null">#{content},</if>
+            <if test="isshow != null">#{isshow},</if>
+            <if test="createuer != null">#{createuer},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="isdel != null">#{isdel},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBNews" parameterType="BNews">
+        update b_news
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null">title = #{title},</if>
+            <if test="resource != null">resource = #{resource},</if>
+            <if test="resourceurl != null">resourceurl = #{resourceurl},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="isshow != null">isshow = #{isshow},</if>
+            <if test="createuer != null">createuer = #{createuer},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="isdel != null">isdel = #{isdel},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBNewsById" parameterType="Long">
+        delete from b_news where id = #{id}
+    </delete>
+
+    <delete id="deleteBNewsByIds" parameterType="String">
+        delete from b_news where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

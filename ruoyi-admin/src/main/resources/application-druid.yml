@@ -2,13 +2,13 @@
 spring:
     datasource:
         type: com.alibaba.druid.pool.DruidDataSource
-        driverClassName: org.postgresql.Driver
+        driverClassName: com.mysql.cj.jdbc.Driver
         druid:
             # 主库数据源
             master:
-                url: jdbc:postgresql://8.148.23.176:65432/postgis_xzqh?validationQuery:SELECT 1
-                username: postgres
-                password: Whqc1234!@#$2024
+                url: jdbc:mysql://8.148.23.176:13306/sys?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+                username: root
+                password: Whqc@123456
             # 从库数据源
             slave:
                 # 从数据源开关/默认关闭
@@ -35,7 +35,7 @@ spring:
             # 配置一个连接在池中最大生存的时间，单位是毫秒
             maxEvictableIdleTimeMillis: 900000
             # 配置检测连接是否有效
-            validationQuery: SELECT version()
+            validationQuery: SELECT 1 FROM DUAL
             testWhileIdle: true
             testOnBorrow: false
             testOnReturn: false

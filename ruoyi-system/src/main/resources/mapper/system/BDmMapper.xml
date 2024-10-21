@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BDmMapper">
+    
+    <resultMap type="BDm" id="BDmResult">
+        <result property="id"    column="id"    />
+        <result property="dicType"    column="dic_type"    />
+        <result property="name"    column="name"    />
+        <result property="address"    column="address"    />
+        <result property="content"    column="content"    />
+        <result property="imgurl"    column="imgurl"    />
+        <result property="pointarr"    column="pointarr"    />
+    </resultMap>
+
+    <sql id="selectBDmVo">
+        select id, dic_type, name, address, content, imgurl, pointarr from b_dm
+    </sql>
+
+    <select id="selectBDmList" parameterType="BDm" resultMap="BDmResult">
+        <include refid="selectBDmVo"/>
+        <where>  
+            <if test="dicType != null  and dicType != ''"> and dic_type = #{dicType}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="imgurl != null  and imgurl != ''"> and imgurl = #{imgurl}</if>
+            <if test="pointarr != null  and pointarr != ''"> and pointarr = #{pointarr}</if>
+        </where>
+    </select>
+    
+    <select id="selectBDmById" parameterType="Long" resultMap="BDmResult">
+        <include refid="selectBDmVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBDm" parameterType="BDm" useGeneratedKeys="true" keyProperty="id">
+        insert into b_dm
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dicType != null">dic_type,</if>
+            <if test="name != null">name,</if>
+            <if test="address != null">address,</if>
+            <if test="content != null">content,</if>
+            <if test="imgurl != null">imgurl,</if>
+            <if test="pointarr != null">pointarr,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dicType != null">#{dicType},</if>
+            <if test="name != null">#{name},</if>
+            <if test="address != null">#{address},</if>
+            <if test="content != null">#{content},</if>
+            <if test="imgurl != null">#{imgurl},</if>
+            <if test="pointarr != null">#{pointarr},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBDm" parameterType="BDm">
+        update b_dm
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="dicType != null">dic_type = #{dicType},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="imgurl != null">imgurl = #{imgurl},</if>
+            <if test="pointarr != null">pointarr = #{pointarr},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBDmById" parameterType="Long">
+        delete from b_dm where id = #{id}
+    </delete>
+
+    <delete id="deleteBDmByIds" parameterType="String">
+        delete from b_dm where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

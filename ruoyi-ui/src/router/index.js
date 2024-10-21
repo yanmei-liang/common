@@ -43,10 +43,16 @@ export const constantRoutes = [
   },
 
   //地名文化
-  {
+  // {
+  //   path: "/login",
+  //   name: "login",
+  //   component: () => import("@/views/service/loginName"),
+  //   hidden: true,
+  // },
+    {
     path: "/login",
     name: "login",
-    component: () => import("@/views/service/loginName"),
+    component: () => import("@/views/login"),
     hidden: true,
   },
   //地名专题
@@ -153,18 +159,18 @@ export const constantRoutes = [
     component: Layout,
     redirect: "login",
     children: [
-      {
-        path: "/login",
-        name: "login",
-        component: () => import("@/views/service/loginName/index.vue"),
-        hidden: true,
-      },
       // {
-      //   path: "index",
-      //   component: () => import("@/views/index"),
-      //   name: "Index",
-      //   meta: { title: "首页", icon: "dashboard", affix: true },
+      //   path: "/login",
+      //   name: "login",
+      //   component: () => import("@/views/service/loginName/index.vue"),
+      //   hidden: true,
       // },
+      {
+        path: "index",
+        component: () => import("@/views/index"),
+        name: "Index",
+        meta: { title: "首页", icon: "dashboard", affix: true },
+      },
     ],
   },
   // {

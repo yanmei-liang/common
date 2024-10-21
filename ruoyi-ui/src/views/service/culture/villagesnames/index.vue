@@ -1,17 +1,17 @@
 <template>
   <div class="container">
     <LoadcultureCate>
-      <!-- <div class="moudle">
+      <div class="moudle">
         <div v-for="item in 9" class="moudle_child" :key="item">
-          <img src="../../assets/images/login-background.jpg" alt="" />
+          <img src="@/assets/images/login-background.jpg" alt="" />
           <div class="imgfont">十堰市街道介绍视频</div>
         </div>
-      </div> -->
+      </div>
     </LoadcultureCate>
   </div>
 </template>
 <script>
-import LoadcultureCate from "../loadcultureCate copy/index.vue";
+import LoadcultureCate from "../loadcultureCate";
 export default {
   components: { LoadcultureCate },
   data() {

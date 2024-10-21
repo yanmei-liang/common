@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import CardImg from "../../components/CardImg/index.vue";
+import CardImg from "@/components/CardImg/index.vue";
 export default {
   props:[],
   components: { CardImg },
@@ -49,40 +49,40 @@ export default {
           id: "1",
           name: "1、武当山景区售票处",
           place: "十堰市丹江口市武当山特区永乐路14号",
-          img: "",
+          img: false,
           scene: true,
         },
         {
           id: "2",
           name: "2.武当山1号停车场",
           place: "十堰市丹江口市武当山特区永乐路14号",
-          img: "../../assets/images/login-background.jpg",
+          img: true,
           scene: true,
         },
         {
           id: "3",
           name: "3.武当山火车站",
           place: "十堰市丹江口市武当山特区永乐路14号",
-          img: "../../assets/images/login-background.jpg",
+          img: true
         },
         {
           id: "4",
           name: "4.武当山风景区-太和楼",
           place: "十堰市丹江口市武当山特区永乐路14号",
-          img: "../../assets/images/login-background.jpg",
+          img:true,
         },
         {
           id: "5",
           name: "5.武当山天乐客栈",
           place: "十堰市丹江口市武当山特区永乐路14号",
-          img: "../../assets/images/login-background.jpg",
+          img:true,
           scene: true,
         },
         {
           id: "6",
           name: "6.武当山-明月道院",
           place: "十堰市丹江口市武当山特区永乐路14号",
-          img: "../../assets/images/login-background.jpg",
+          img:true,
         },
       ],
       options: [

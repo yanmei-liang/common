@@ -2,7 +2,7 @@
   <div class="container">
     <div v-show="$route.meta.showFather">
       <div class="header">
-        <img src="../../assets/images/zhengcezixun.png" alt="" />
+        <img src="../../../assets/images/zhengcezixun.png" alt="" />
       </div>
       <div class="content">
         <el-tabs v-model="activeName" stretch>
@@ -48,7 +48,7 @@
   </div>
 </template>
 <script>
-import Pagination from "../../components/Pagination/index.vue";
+import Pagination from "@/components/Pagination/index.vue";
 export default {
   components: { Pagination },
   data() {

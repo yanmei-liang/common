@@ -46,49 +46,49 @@ export const constantRoutes = [
   {
     path: "/login",
     name: "login",
-    component: () => import("@/views/loginName/index.vue"),
+    component: () => import("@/views/service/loginName"),
     hidden: true,
   },
   //地名专题
   {
     path: "/culture",
     name: "culture",
-    component: () => import("@/views/demo.vue"),
+    component: () => import("@/views/service/culture/demo.vue"),
     meta: { title: "地名文化", showFather: true },
     children: [
       {
         //电子地名文化丛书
         path: "loadcultureCate",
         name: "loadcultureCate",
-        component: () => import("@/views/loadcultureCate/index.vue"),
+        component: () => import("@/views/service/culture/loadcultureCate/index.vue"),
         meta: { title: "电子地名文化丛书", showFather: false },
       },
       {
         //电子图集挂图
         path: "loadPhotos",
         name: "loadPhotos",
-        component: () => import("@/views/loadPhotos/index.vue"),
+        component: () => import("@/views/service/culture/loadPhotos/index.vue"),
         meta: { title: "电子图集挂图", showFather: false },
       },
       {
         //地名故事影音
         path: "loadVedio",
         name: "loadVedio",
-        component: () => import("@/views/loadVedio/index.vue"),
+        component: () => import("@/views/service/culture/loadVedio/index.vue"),
         meta: { title: "地名故事影音", showFather: false },
       },
       {
         //古镇古村地名文化
         path: "villagesnames",
         name: "villagesnames",
-        component: () => import("@/views/villagesnames/index.vue"),
+        component: () => import("@/views/service/culture/villagesnames/index.vue"),
         meta: { title: "古镇、古村地名文化", showFather: false },
       },
       {
         //文化遗产目录
         path: "heritageView",
         name: "heritageView",
-        component: () => import("@/views/villagesnames/index.vue"),
+        component: () => import("@/views/service/culture/villagesnames/index.vue"),
         meta: { title: "文化遗产目录", showFather: false },
       },
     ],
@@ -98,20 +98,20 @@ export const constantRoutes = [
     //区划演变
     path: "/region",
     name: "region",
-    component: () => import("@/views/regionView/index.vue"),
+    component: () => import("@/views/service/regionView/index.vue"),
   },
   {
     //政策咨询
     path: "/policy",
     name: "policy",
-    component: () => import("@/views/policy/index.vue"),
+    component: () => import("@/views/service/policy/index.vue"),
     meta:{title:'政策咨询', showFather: true},
     children: [
       {
         //详情查看
         path: "policyDetail",
         name: "policyDetail",
-        component: () => import("@/views/policy/detail/index.vue"),
+        component: () => import("@/views/service/policy/detail/index.vue"),
         meta: { title: "详情查看", showFather: false },
       },
     ],
@@ -120,22 +120,22 @@ export const constantRoutes = [
     //公众互动
     path: "/public",
     name: "public",
-    component: () => import("@/views/publicView/index.vue"),
+    component: () => import("@/views/service/publicView/index.vue"),
   },
 
   {
     path: "/searchload",
-    component: () => import("@/views/searchLoad/index.vue"),
+    component: () => import("@/views/service/searchLoad/index.vue"),
     hidden: true,
   },
-  {
-    path: "/register",
-    component: () => import("@/views/register"),
-    hidden: true,
-  },
+  // {
+  //   path: "/register",
+  //   component: () => import("@/views/service/register"),
+  //   hidden: true,
+  // },
   {
     path: "/placeName",
-    component: () => import("@/views/placeName/index.vue"),
+    component: () => import("@/views/service/placeName/index.vue"),
     hidden: true,
   },
   {
@@ -156,7 +156,7 @@ export const constantRoutes = [
       {
         path: "/login",
         name: "login",
-        component: () => import("@/views/loginName/index.vue"),
+        component: () => import("@/views/service/loginName/index.vue"),
         hidden: true,
       },
       // {

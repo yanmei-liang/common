@@ -1,6 +1,6 @@
 <template>
   <div>
-    <video class="video" src="../../assets/1.mp4" controls autoplay></video>
+    <video class="video" src="@/assets/1.mp4" controls autoplay></video>
   </div>
 </template>
 <style scoped>

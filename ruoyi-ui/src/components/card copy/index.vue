@@ -17,7 +17,7 @@
     >
       <el-col :span="card.col || 8">
         <!-- <div style="background-color: red; width: 100%; vertical-align:middle"></div> -->
-        <img src="../../assets/images/login-background.jpg" :style="{backgroundSize: 'cover',width:'100%'}" alt="">
+        <!-- <img src="../../../assets/images/login-background.jpg" :style="{backgroundSize: 'cover',width:'100%'}" alt=""> -->
       </el-col>
       <el-col :span="24 - card.col || 16">
         <el-card shadow="always">

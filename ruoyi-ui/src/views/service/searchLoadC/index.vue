@@ -24,12 +24,12 @@
     </div>
     <el-row>
       <el-col :span="10" v-for="item in 3" :key="item">
-        <img
+        <!-- <img
           src="../../assets/images/login-background.jpg"
           width="100%"
           height="200px"
           alt=""
-        />
+        /> -->
       </el-col>
 
     </el-row>

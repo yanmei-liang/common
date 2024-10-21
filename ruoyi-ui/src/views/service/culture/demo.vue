@@ -5,7 +5,7 @@
   </div>
 </template>
 <script>
-import Loadculture from "../views/loadculture/index.vue";
+import Loadculture from "@/views/service/loadculture";
 export default {
   components: { Loadculture },
 

@@ -7,7 +7,7 @@
       >
       <el-col :span="24">
         <img
-          src="../../assets/images/login-background.jpg"
+          src="@/assets/images/login-background.jpg"
           width="100%"
           height="200px"
           alt=""

@@ -33,8 +33,8 @@
   </div>
 </template>
 <script>
-import HeaderSearch from "../../components/Query/index.vue";
-import QueryCard from "../../components/card/index.vue";
+import HeaderSearch from "@/components/Query/index.vue";
+import QueryCard from "@/components/card/index.vue";
 import Breadcrumb from "@/components/Breadcrumb/index.vue";
 export default {
   components: { HeaderSearch, QueryCard,Breadcrumb },
@@ -130,7 +130,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url("../../assets/images/login-background.jpg");
+  background-image: url('~@/assets/images/login-background.jpg');
   background-size: contain;
   width: 100%;
   height: 10vh;

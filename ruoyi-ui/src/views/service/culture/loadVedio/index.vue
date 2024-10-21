@@ -3,7 +3,7 @@
     <LoadcultureCate>
       <div class="moudle">
         <div v-for="item in 9" class="moudle_child" :key="item">
-          <img src="../../assets/images/login-background.jpg" alt="" />
+          <img src="@/assets/images/login-background.jpg" alt="" />
           <div class="imgfont">十堰市街道介绍视频</div>
         </div>
       </div>
@@ -11,7 +11,7 @@
   </div>
 </template>
 <script>
-import LoadcultureCate from "../loadcultureCate copy/index.vue";
+import LoadcultureCate from "../../loadcultureCate copy/index.vue";
 export default {
   components: { LoadcultureCate },
   data() {

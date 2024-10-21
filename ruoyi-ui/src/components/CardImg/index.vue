@@ -38,7 +38,6 @@
             </div>
             <div v-else>
               <img src="../../assets/images/login-background.jpg" alt="" />
-              <!-- <div class="readImg">查看图片</div> -->
             </div>
           </el-col>
         </el-row>
@@ -77,13 +76,12 @@
           <div>
             <SearchLoad :dataList="dataList" class="search-load">
               <template>
-                <img src="../../assets/images/login-background.jpg" alt="" />
-                <img src="../../assets/images/login-background.jpg" alt="" />
-                <img src="../../assets/images/login-background.jpg" alt="" />
-                <img src="../../assets/images/login-background.jpg" alt="" />
-                <img src="../../assets/images/login-background.jpg" alt="" />
-                <img src="../../assets/images/login-background.jpg" alt="" />
-                <img src="../../assets/images/login-background.jpg" alt="" />
+                <img src="@/assets/images/login-background.jpg" alt="" />
+                <img src="@/assets/images/login-background.jpg" alt="" />
+                <img src="@/assets/images/login-background.jpg" alt="" />
+                <img src="@/assets/images/login-background.jpg" alt="" />
+                <img src="@/assets/images/login-background.jpg" alt="" />
+                <img src="@/assets/images/login-background.jpg" alt="" />
               </template>
             </SearchLoad>
           </div>
@@ -93,7 +91,7 @@
   </div>
 </template>
 <script>
-import SearchLoad from "@/views/searchLoad/index.vue";
+import SearchLoad from "@/views/service/searchLoad/index.vue";
 export default {
   components: { SearchLoad },
   props: ["cardVal"],

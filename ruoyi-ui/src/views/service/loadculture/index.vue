@@ -20,7 +20,7 @@
   </div>
 </template>
 <script>
-import TopNav from "../../components/TopNav/index.vue";
+import TopNav from "@/components/TopNav/index.vue";
 export default {
   components: { TopNav },
   data() {
@@ -49,7 +49,7 @@ export default {
 </script>
 <style scoped lang="scss">
 .container {
-  background-image: url("../../assets/images/login-background.jpg");
+  background-image: url('~@/assets/images/login-background.jpg');
   background-size: cover;
 }
 p {

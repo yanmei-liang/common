@@ -1,9 +1,9 @@
 <template>
-  <el-breadcrumb class="app-breadcrumb" separator="/">
+  <el-breadcrumb class="app-breadcrumb" separator-class="el-icon-arrow-right">
     <transition-group name="breadcrumb">
       <el-breadcrumb-item v-for="(item,index) in levelList" :key="item.path">
-        <span v-if="item.redirect === 'noRedirect' || index == levelList.length - 1" class="no-redirect">{{ item.meta.title }}</span>
-        <a v-else @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
+        <span v-if="item.redirect === 'noRedirect' || index == levelList.length - 1" class="no-redirect"><el-button disabled>{{ item.meta.title }}</el-button>  </span>
+        <a v-else @click.prevent="handleLink(item)"><el-button>{{ item.meta.title }}</el-button>  </a>
       </el-breadcrumb-item>
     </transition-group>
   </el-breadcrumb>
@@ -35,7 +35,7 @@ export default {
       const first = matched[0]
 
       if (!this.isDashboard(first)) {
-        matched = [{ path: '/index', meta: { title: '首页' }}].concat(matched)
+        // matched = [{ path: '/index', meta: { title: '首页' }}].concat(matched)
       }
 
       this.levelList = matched.filter(item => item.meta && item.meta.title && item.meta.breadcrumb !== false)
@@ -62,7 +62,7 @@ export default {
 <style lang="scss" scoped>
 .app-breadcrumb.el-breadcrumb {
   display: inline-block;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 50px;
   margin-left: 8px;
 

@@ -1,10 +1,10 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from "vue";
+import Router from "vue-router";
 
-Vue.use(Router)
+Vue.use(Router);
 
 /* Layout */
-import Layout from '@/layout'
+import Layout from "@/layout";
 
 /**
  * Note: 路由配置项
@@ -31,153 +31,248 @@ import Layout from '@/layout'
 // 公共路由
 export const constantRoutes = [
   {
-    path: '/redirect',
+    path: "/redirect",
     component: Layout,
     hidden: true,
     children: [
       {
-        path: '/redirect/:path(.*)',
-        component: () => import('@/views/redirect')
-      }
-    ]
+        path: "/redirect/:path(.*)",
+        component: () => import("@/views/redirect"),
+      },
+    ],
   },
+
+  //地名文化
   {
-    path: '/login',
-    component: () => import('@/views/login'),
-    hidden: true
-  },
-  {
-    path: '/register',
-    component: () => import('@/views/register'),
-    hidden: true
-  },
-  {
-    path: '/404',
-    component: () => import('@/views/error/404'),
-    hidden: true
-  },
-  {
-    path: '/401',
-    component: () => import('@/views/error/401'),
-    hidden: true
-  },
-  {
-    path: '',
-    component: Layout,
-    redirect: 'index',
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/index'),
-        name: 'Index',
-        meta: { title: '首页', icon: 'dashboard', affix: true }
-      }
-    ]
-  },
-  {
-    path: '/user',
-    component: Layout,
+    path: "/login",
+    name: "login",
+    component: () => import("@/views/loginName/index.vue"),
     hidden: true,
-    redirect: 'noredirect',
+  },
+  //地名专题
+  {
+    path: "/culture",
+    name: "culture",
+    component: () => import("@/views/demo.vue"),
+    meta: { title: "地名文化", showFather: true },
     children: [
       {
-        path: 'profile',
-        component: () => import('@/views/system/user/profile/index'),
-        name: 'Profile',
-        meta: { title: '个人中心', icon: 'user' }
-      }
-    ]
-  }
-]
+        //电子地名文化丛书
+        path: "loadcultureCate",
+        name: "loadcultureCate",
+        component: () => import("@/views/loadcultureCate/index.vue"),
+        meta: { title: "电子地名文化丛书", showFather: false },
+      },
+      {
+        //电子图集挂图
+        path: "loadPhotos",
+        name: "loadPhotos",
+        component: () => import("@/views/loadPhotos/index.vue"),
+        meta: { title: "电子图集挂图", showFather: false },
+      },
+      {
+        //地名故事影音
+        path: "loadVedio",
+        name: "loadVedio",
+        component: () => import("@/views/loadVedio/index.vue"),
+        meta: { title: "地名故事影音", showFather: false },
+      },
+      {
+        //古镇古村地名文化
+        path: "villagesnames",
+        name: "villagesnames",
+        component: () => import("@/views/villagesnames/index.vue"),
+        meta: { title: "古镇、古村地名文化", showFather: false },
+      },
+      {
+        //文化遗产目录
+        path: "heritageView",
+        name: "heritageView",
+        component: () => import("@/views/villagesnames/index.vue"),
+        meta: { title: "文化遗产目录", showFather: false },
+      },
+    ],
+    hidden: true,
+  },
+  {
+    //区划演变
+    path: "/region",
+    name: "region",
+    component: () => import("@/views/regionView/index.vue"),
+  },
+  {
+    //政策咨询
+    path: "/policy",
+    name: "policy",
+    component: () => import("@/views/policy/index.vue"),
+    meta:{title:'政策咨询', showFather: true},
+    children: [
+      {
+        //详情查看
+        path: "policyDetail",
+        name: "policyDetail",
+        component: () => import("@/views/policy/detail/index.vue"),
+        meta: { title: "详情查看", showFather: false },
+      },
+    ],
+  },
+  {
+    //公众互动
+    path: "/public",
+    name: "public",
+    component: () => import("@/views/publicView/index.vue"),
+  },
+
+  {
+    path: "/searchload",
+    component: () => import("@/views/searchLoad/index.vue"),
+    hidden: true,
+  },
+  {
+    path: "/register",
+    component: () => import("@/views/register"),
+    hidden: true,
+  },
+  {
+    path: "/placeName",
+    component: () => import("@/views/placeName/index.vue"),
+    hidden: true,
+  },
+  {
+    path: "/404",
+    component: () => import("@/views/error/404"),
+    hidden: true,
+  },
+  {
+    path: "/401",
+    component: () => import("@/views/error/401"),
+    hidden: true,
+  },
+  {
+    path: "",
+    component: Layout,
+    redirect: "login",
+    children: [
+      {
+        path: "/login",
+        name: "login",
+        component: () => import("@/views/loginName/index.vue"),
+        hidden: true,
+      },
+      // {
+      //   path: "index",
+      //   component: () => import("@/views/index"),
+      //   name: "Index",
+      //   meta: { title: "首页", icon: "dashboard", affix: true },
+      // },
+    ],
+  },
+  // {
+  //   path: '/user',
+  //   component: Layout,
+  //   hidden: true,
+  //   redirect: 'noredirect',
+  //   children: [
+  //     {
+  //       path: 'profile',
+  //       component: () => import('@/views/system/user/profile/index'),
+  //       name: 'Profile',
+  //       meta: { title: '个人中心', icon: 'user' }
+  //     }
+  //   ]
+  // }
+];
 
 // 动态路由，基于用户权限动态去加载
 export const dynamicRoutes = [
   {
-    path: '/system/user-auth',
+    path: "/system/user-auth",
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit'],
+    permissions: ["system:user:edit"],
     children: [
       {
-        path: 'role/:userId(\\d+)',
-        component: () => import('@/views/system/user/authRole'),
-        name: 'AuthRole',
-        meta: { title: '分配角色', activeMenu: '/system/user' }
-      }
-    ]
+        path: "role/:userId(\\d+)",
+        component: () => import("@/views/system/user/authRole"),
+        name: "AuthRole",
+        meta: { title: "分配角色", activeMenu: "/system/user" },
+      },
+    ],
+  },
+  {},
+  {
+    path: "/system/role-auth",
+    component: Layout,
+    hidden: true,
+    permissions: ["system:role:edit"],
+    children: [
+      {
+        path: "user/:roleId(\\d+)",
+        component: () => import("@/views/system/role/authUser"),
+        name: "AuthUser",
+        meta: { title: "分配用户", activeMenu: "/system/role" },
+      },
+    ],
   },
   {
-    path: '/system/role-auth',
+    path: "/system/dict-data",
     component: Layout,
     hidden: true,
-    permissions: ['system:role:edit'],
+    permissions: ["system:dict:list"],
     children: [
       {
-        path: 'user/:roleId(\\d+)',
-        component: () => import('@/views/system/role/authUser'),
-        name: 'AuthUser',
-        meta: { title: '分配用户', activeMenu: '/system/role' }
-      }
-    ]
+        path: "index/:dictId(\\d+)",
+        component: () => import("@/views/system/dict/data"),
+        name: "Data",
+        meta: { title: "字典数据", activeMenu: "/system/dict" },
+      },
+    ],
   },
   {
-    path: '/system/dict-data',
+    path: "/monitor/job-log",
     component: Layout,
     hidden: true,
-    permissions: ['system:dict:list'],
+    permissions: ["monitor:job:list"],
     children: [
       {
-        path: 'index/:dictId(\\d+)',
-        component: () => import('@/views/system/dict/data'),
-        name: 'Data',
-        meta: { title: '字典数据', activeMenu: '/system/dict' }
-      }
-    ]
+        path: "index/:jobId(\\d+)",
+        component: () => import("@/views/monitor/job/log"),
+        name: "JobLog",
+        meta: { title: "调度日志", activeMenu: "/monitor/job" },
+      },
+    ],
   },
   {
-    path: '/monitor/job-log',
+    path: "/tool/gen-edit",
     component: Layout,
     hidden: true,
-    permissions: ['monitor:job:list'],
+    permissions: ["tool:gen:edit"],
     children: [
       {
-        path: 'index/:jobId(\\d+)',
-        component: () => import('@/views/monitor/job/log'),
-        name: 'JobLog',
-        meta: { title: '调度日志', activeMenu: '/monitor/job' }
-      }
-    ]
+        path: "index/:tableId(\\d+)",
+        component: () => import("@/views/tool/gen/editTable"),
+        name: "GenEdit",
+        meta: { title: "修改生成配置", activeMenu: "/tool/gen" },
+      },
+    ],
   },
-  {
-    path: '/tool/gen-edit',
-    component: Layout,
-    hidden: true,
-    permissions: ['tool:gen:edit'],
-    children: [
-      {
-        path: 'index/:tableId(\\d+)',
-        component: () => import('@/views/tool/gen/editTable'),
-        name: 'GenEdit',
-        meta: { title: '修改生成配置', activeMenu: '/tool/gen' }
-      }
-    ]
-  }
-]
+];
 
 // 防止连续点击多次路由报错
 let routerPush = Router.prototype.push;
+
 let routerReplace = Router.prototype.replace;
 // push
-Router.prototype.push = function push(location) {
-  return routerPush.call(this, location).catch(err => err)
-}
-// replace
-Router.prototype.replace = function push(location) {
-  return routerReplace.call(this, location).catch(err => err)
-}
+// Router.prototype.push = function push(location) {
+//   return routerPush.call(this, location)
+// }
+// // replace
+// Router.prototype.replace = function push(location) {
+//   return routerReplace.call(this, location)
+// }
 
 export default new Router({
-  mode: 'history', // 去掉url中的#
+  mode: "history", // 去掉url中的#
   scrollBehavior: () => ({ y: 0 }),
-  routes: constantRoutes
-})
+  routes: constantRoutes,
+});

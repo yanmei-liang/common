@@ -1,28 +1,34 @@
 <template>
   <div id="app">
+    <Header />
     <router-view />
-    <theme-picker />
   </div>
 </template>
 
 <script>
 import ThemePicker from "@/components/ThemePicker";
-
+import Header from "@/components/header/index.vue";
 export default {
   name: "App",
-  components: { ThemePicker },
+  components: { ThemePicker, Header },
+  methods: {
+  },
   metaInfo() {
     return {
-      title: this.$store.state.settings.dynamicTitle && this.$store.state.settings.title,
-      titleTemplate: title => {
-        return title ? `${title} - ${process.env.VUE_APP_TITLE}` : process.env.VUE_APP_TITLE
-      }
-    }
-  }
+      title:
+        this.$store.state.settings.dynamicTitle &&
+        this.$store.state.settings.title,
+      titleTemplate: (title) => {
+        return title
+          ? `${title} - ${process.env.VUE_APP_TITLE}`
+          : process.env.VUE_APP_TITLE;
+      },
+    };
+  },
 };
 </script>
-<style scoped>
-#app .theme-picker {
+<style>
+/* #app .theme-picker {
   display: none;
-}
+} */
 </style>

@@ -21,7 +21,6 @@ export default {
   },
   methods:{
     getBtn(){
-      // console.log('111',this.parentData.value)
       this.$emit('setBtnBalue',this.parentData.value)
     }
   }

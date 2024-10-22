@@ -12,14 +12,40 @@
 </template>
 <script>
 import LoadcultureCate from "../loadcultureCate";
+import {
+  listMedia,
+  getMedia,
+  delMedia,
+  addMedia,
+  updateMedia,
+} from "@/api/system/media";
 export default {
   components: { LoadcultureCate },
   data() {
-    return {};
+    return {
+      queryParams: {
+        pageNum: 1,
+        pageSize: 100,
+        type: null,
+        name: null,
+        author: null,
+        area: null,
+        mainimg: null,
+        content: null,
+        isshow: null,
+        createuer: null,
+        createtime: null,
+        isdel: null,
+      },
+    };
   },
   created() {},
   mounted() {
-    console.log();
+    const data = { ...this.queryParams };
+    listMedia(data).then((res) => {
+      console.log("1111", res.rows);
+      this.cardContent = res.rows;
+    });
   },
   watch: {},
   methods: {},

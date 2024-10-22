@@ -10,6 +10,7 @@
         placeholder="请选择"
         style="width: 120px"
         size="mini"
+        @change="handleChange"
       >
         <el-option
           v-for="item in options"
@@ -30,7 +31,7 @@
     </div>
     <div style="margin-top: 10px; overflow: auto; height: 500px">
       <div class="flex place_buttom">
-        <CardImg :cardVal="cardVal" />
+        <CardImg :cardVal="arrList" />
       </div>
     </div>
   </div>
@@ -39,78 +40,71 @@
 <script>
 import CardImg from "@/components/CardImg/index.vue";
 export default {
-  props:[],
+  props: ["dataList"],
   components: { CardImg },
   data() {
     return {
       inputVal: "",
-      cardVal: [
-        {
-          id: "1",
-          name: "1、武当山景区售票处",
-          place: "十堰市丹江口市武当山特区永乐路14号",
-          img: false,
-          scene: true,
-        },
-        {
-          id: "2",
-          name: "2.武当山1号停车场",
-          place: "十堰市丹江口市武当山特区永乐路14号",
-          img: true,
-          scene: true,
-        },
-        {
-          id: "3",
-          name: "3.武当山火车站",
-          place: "十堰市丹江口市武当山特区永乐路14号",
-          img: true
-        },
-        {
-          id: "4",
-          name: "4.武当山风景区-太和楼",
-          place: "十堰市丹江口市武当山特区永乐路14号",
-          img:true,
-        },
-        {
-          id: "5",
-          name: "5.武当山天乐客栈",
-          place: "十堰市丹江口市武当山特区永乐路14号",
-          img:true,
-          scene: true,
-        },
-        {
-          id: "6",
-          name: "6.武当山-明月道院",
-          place: "十堰市丹江口市武当山特区永乐路14号",
-          img:true,
-        },
-      ],
       options: [
         {
-          value: "选项1",
-          label: "全部年份",
+          value: "全部市辖区",
+          label: "全部市辖区",
         },
         {
-          value: "选项2",
-          label: "2005",
+          value: "茅箭",
+          label: "茅箭区",
         },
         {
-          value: "选项3",
-          label: "1999",
+          value: "张湾",
+          label: "张湾区",
         },
         {
-          value: "选项4",
-          label: "1983",
+          value: "郧阳",
+          label: "郧阳区",
         },
         {
-          value: "选项5",
-          label: "1999",
+          value: "郧西",
+          label: "郧西县",
+        },
+        {
+          value: "竹山",
+          label: "竹山县",
+        },
+        {
+          value: "竹溪",
+          label: "竹溪县",
+        },
+        {
+          value: "房县",
+          label: "房县区",
+        },
+        {
+          value: "丹江口",
+          label: "丹江口市",
         },
       ],
       value: "",
+      arrList: [],
     };
   },
+  mounted() {
+    this.arrList = this.$props.dataList;
+    console.log( this.$props.dataList)
+  },
   methods: {
+    handleChange(val) {
+      // console.log(this.arrList);
+      if (val != "全部市辖区") {
+       this.arrList = this.$props.dataList.filter((item) => {
+          const pattern = new RegExp(val, "i");
+          if (pattern.test(item.address)) {
+            return item;
+          }
+        });
+      }else{
+        this.arrList = this.$props.dataList
+      }
+    },
     goBack() {
       const value = {
         btn: true,

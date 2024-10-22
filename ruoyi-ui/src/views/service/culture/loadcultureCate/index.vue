@@ -7,7 +7,7 @@
       </div>
     </div>
 
-    <el-container style="width: 100%; height: 90vh !important">
+    <el-container style="width: 100%; height: 95vh !important">
       <el-container class="filter-tree">
         <el-aside width="200px">
           <el-tree
@@ -18,7 +18,7 @@
           >
           </el-tree>
         </el-aside>
-        <el-container style="margin-bottom:15vh">
+        <el-container style="margin-bottom: 5vh">
           <el-main>
             <QueryCard :card="cardContent" />
           </el-main>
@@ -31,6 +31,13 @@
 import HeaderSearch from "@/components/Query/index.vue";
 import QueryCard from "@/components/card/index.vue";
 import Breadcrumb from "@/components/Breadcrumb/index.vue";
+import {
+  listMedia,
+  getMedia,
+  delMedia,
+  addMedia,
+  updateMedia,
+} from "@/api/system/media";
 export default {
   components: { HeaderSearch, QueryCard, Breadcrumb },
   name: "MyComponent",
@@ -72,18 +79,30 @@ export default {
         children: "children",
         label: "label",
       },
-      cardContent: {
-        width: "373px",
-        col: 12,
-        title: "名称名称名称",
-        name: "李四",
-        content:
-          "十堰电子地名丛书涵盖了十堰市及其所辖县（市区）、乡镇（街道）、社区（村）等各类行政区划名称，以及公路、街巷、桥梁、隧道、车站、",
+      cardContent: [],
+      queryParams: {
+        pageNum: 1,
+        pageSize: 10,
+        type: null,
+        name: null,
+        author: null,
+        area: null,
+        mainimg: null,
+        content: null,
+        isshow: null,
+        createuer: null,
+        createtime: null,
+        isdel: null,
       },
     };
   },
   created() {},
   mounted() {
+    const data = { ...this.queryParams, type:'电子丛书'};
+    listMedia(data).then((res) => {
+      // console.log(res.rows,data);
+      this.cardContent = res.rows;
+    });
   },
   watch: {},
   methods: {
@@ -101,7 +120,7 @@ export default {
   border-width: 0px;
   position: absolute;
   left: 0px;
-  top:20vh;
+  top: 8vh;
   width: 100%;
   height: 80px;
   /* line-height: 120px; */
@@ -112,7 +131,7 @@ export default {
   -webkit-box-shadow: none;
   box-shadow: none;
   z-index: 999;
-  margin: 0 20px;
+  // margin: 0 20px;
   background-color: rgba(242, 242, 242, 0.996078431372549);
 }
 .pos_header {
@@ -122,17 +141,17 @@ export default {
 }
 .container {
   display: block;
-  height: 100vh;
+  // height: 100vh;
 }
 .header {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url('~@/assets/images/login-background.jpg');
-  
+  background-image: url("~@/assets/images/login-background.jpg");
+
   background-size: contain;
   width: 100%;
-  height: 10vh;
+  height: 8vh;
   float: left;
   /* position: absolute;
   left: 45%;
@@ -149,7 +168,7 @@ export default {
   /* font-size: 30px; */
   color: black;
 }
-::v-deep .app-breadcrumb{
+::v-deep .app-breadcrumb {
   line-height: 80px !important;
 }
 </style>

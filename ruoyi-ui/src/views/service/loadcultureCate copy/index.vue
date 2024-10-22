@@ -102,9 +102,9 @@ export default {
   border-width: 0px;
   position: absolute;
   left: 0px;
-  top: 20vh;
+  top:50px;
   width: 100%;
-  height: 120px;
+  height: 10vh;
   background: inherit;
   background-color: rgba(51, 51, 51, 0.368627450980392);
   border: none;
@@ -143,6 +143,7 @@ export default {
 .filter-tree {
   margin-top: 22vh;
   margin-bottom: 10vh;
+  height: 80vh;
 }
 .breadcrumb_left {
   font-size: 20px;

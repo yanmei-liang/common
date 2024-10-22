@@ -1,14 +1,16 @@
 <template>
   <div style="width: 100%">
-    <div v-for="item in cardVal" :key="item.id">
+    <div v-for="(item, index) in cardVal" :key="item.id">
       <div class="content">
         <el-row style="width: 90%; height: 100px">
           <el-col :span="16">
             <div class="flex_align">
-              <h3 style="font-weight: 700">{{ item.name }}</h3>
+              <h3 style="font-weight: 700">
+                {{ index + 1 + "、" + item.name }}
+              </h3>
               <div
                 class="flex_align realistic"
-                v-if="item.scene"
+                v-if="!!item.imgurl"
                 @click="realistic(item)"
               >
                 <img
@@ -25,15 +27,18 @@
                 margin-left: 10px;
                 font-size: 13px;
                 color: rgb(127, 127, 127);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
               "
             >
-              {{ item.place }}
+              {{ item.address }}
             </p>
           </el-col>
           <el-col :span="8" class="col1">
             <!-- {{item.img}} -->
-            <div v-if="!!item.img">
-              <img src="../../assets/images/login-background.jpg" alt="" />
+            <div  v-if="!!item.imgurl">
+              <img style="width:120px;height:80px" :src="item.imgurl" alt="" />
               <div class="readImg" @click="handRead(item)">查看图片</div>
             </div>
             <div v-else>
@@ -54,11 +59,9 @@
       :modal="false"
     >
       <el-row style="display: flex; align-items: center">
-        <el-col :span="5">
-          <h1>武当山风景区售票处</h1>
-        </el-col>
-        <el-col :span="4">
-          <el-button type="primary" @click="handImg">
+        <el-col :span="12" style="display: flex; align-items: center;">
+          <h1>{{ dataTitle }}</h1>
+          <el-button type="primary" @click="handImg" style="margin-left:30px">
             <!-- <img
               style="width: 25px; padding: 5px"
               src="../../assets/images/5.png"
@@ -67,21 +70,22 @@
             <span>实景查看</span>
           </el-button>
         </el-col>
+        <el-col :span="4"> </el-col>
       </el-row>
       <el-row>
         <el-col :span="16">
-          <img src="../../assets/images/login-background.jpg" alt=""
+          <img class="imgurl" :src="dataImg" alt=""
         /></el-col>
         <el-col :span="8">
           <div>
             <SearchLoad :dataList="dataList" class="search-load">
               <template>
+                <!-- <img src="@/assets/images/login-background.jpg" alt="" />
                 <img src="@/assets/images/login-background.jpg" alt="" />
                 <img src="@/assets/images/login-background.jpg" alt="" />
                 <img src="@/assets/images/login-background.jpg" alt="" />
                 <img src="@/assets/images/login-background.jpg" alt="" />
-                <img src="@/assets/images/login-background.jpg" alt="" />
-                <img src="@/assets/images/login-background.jpg" alt="" />
+                <img src="@/assets/images/login-background.jpg" alt="" /> -->
               </template>
             </SearchLoad>
           </div>
@@ -99,21 +103,25 @@ export default {
     return {
       dialogVisible: false,
       dataList: null,
+      dataTitle: "",
+      dataImg:""
     };
+  },
+  mounted(){
   },
   methods: {
     handRead(val) {
       this.dataList = {
         header: false,
-        name: "武当山风景区售票处",
-        address: "十堰市丹江口市武当山特区永乐路14号",
-        name1: "事件纪念地现今地名",
-        jiedao: "永乐街道",
-        laiyuan: "实地调查",
-        jianjie:
-          "武当山风景区1号停车场位于永乐路14号武当山风景区，靠近武当路、G316和金街，是游客游览武当山的重要交通枢纽。该停车场地理位置优越，与售票大厅相邻，方便游客购票后直接进入停车场。停车场设有明显的指示标志，方便游客快速找到停车位置。收费标准合理，每小时3元，24小时以内25元封顶。此外，停车场周边有多个公交站，包括武当山、武当山门等，可换乘206路、十堰武当山机场巴士2号线、十堰客运巴士班线等多条公交线路，为游客提供了便捷的交通选择",
+        name: val.name,
+        address: val.address,
+        // name1: "事件纪念地现今地名",
+        // jiedao: "永乐街道",
+        // laiyuan: "实地调查",
+        jianjie: val.content,
       };
-      console.log(val);
+      this.dataTitle = val.name;
+      this.dataImg = val.imgurl
       // this.$router.replace('https://vr.baidu.com/vrcc/pano-share.html?shareId=share_9c47e87f9')
       this.dialogVisible = true;
     },
@@ -186,8 +194,16 @@ img {
   p {
     font-size: 16px;
   }
+  img {
+    height: 100px;
+    width: 80px;
+  }
 }
-::v-deep .el-dialog__headerbtn{
+::v-deep .el-dialog__headerbtn {
   font-size: 40px;
+}
+.imgurl{
+  width: 70vw;
+  // height: 70vh;
 }
 </style>

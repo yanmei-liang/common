@@ -42,108 +42,111 @@ export const constantRoutes = [
     ],
   },
 
-  //地名文化
-  // {
-  //   path: "/login",
-  //   name: "login",
-  //   component: () => import("@/views/service/loginName"),
-  //   hidden: true,
-  // },
-    {
+  {
     path: "/login",
     name: "login",
     component: () => import("@/views/login"),
     hidden: true,
   },
-  //地名专题
-  {
-    path: "/culture",
-    name: "culture",
-    component: () => import("@/views/service/culture/demo.vue"),
-    meta: { title: "地名文化", showFather: true },
-    children: [
-      {
-        //电子地名文化丛书
-        path: "loadcultureCate",
-        name: "loadcultureCate",
-        component: () => import("@/views/service/culture/loadcultureCate/index.vue"),
-        meta: { title: "电子地名文化丛书", showFather: false },
-      },
-      {
-        //电子图集挂图
-        path: "loadPhotos",
-        name: "loadPhotos",
-        component: () => import("@/views/service/culture/loadPhotos/index.vue"),
-        meta: { title: "电子图集挂图", showFather: false },
-      },
-      {
-        //地名故事影音
-        path: "loadVedio",
-        name: "loadVedio",
-        component: () => import("@/views/service/culture/loadVedio/index.vue"),
-        meta: { title: "地名故事影音", showFather: false },
-      },
-      {
-        //古镇古村地名文化
-        path: "villagesnames",
-        name: "villagesnames",
-        component: () => import("@/views/service/culture/villagesnames/index.vue"),
-        meta: { title: "古镇、古村地名文化", showFather: false },
-      },
-      {
-        //文化遗产目录
-        path: "heritageView",
-        name: "heritageView",
-        component: () => import("@/views/service/culture/villagesnames/index.vue"),
-        meta: { title: "文化遗产目录", showFather: false },
-      },
-    ],
-    hidden: true,
-  },
-  {
-    //区划演变
-    path: "/region",
-    name: "region",
-    component: () => import("@/views/service/regionView/index.vue"),
-  },
-  {
-    //政策咨询
-    path: "/policy",
-    name: "policy",
-    component: () => import("@/views/service/policy/index.vue"),
-    meta:{title:'政策咨询', showFather: true},
-    children: [
-      {
-        //详情查看
-        path: "policyDetail",
-        name: "policyDetail",
-        component: () => import("@/views/service/policy/detail/index.vue"),
-        meta: { title: "详情查看", showFather: false },
-      },
-    ],
-  },
-  {
-    //公众互动
-    path: "/public",
-    name: "public",
-    component: () => import("@/views/service/publicView/index.vue"),
-  },
-
-  {
-    path: "/searchload",
-    component: () => import("@/views/service/searchLoad/index.vue"),
-    hidden: true,
-  },
+  // //地名文化
   // {
-  //   path: "/register",
-  //   component: () => import("@/views/service/register"),
+  //   path: "/loginName",
+  //   name: "loginName",
+  //   component: () => import("@/views/service/loginName"),
   //   hidden: true,
   // },
-  {
-    path: "/placeName",
-    component: () => import("@/views/service/placeName/index.vue"),
-    hidden: true,
-  },
+  //地名专题
+  // {
+  //   path: "/culture",
+  //   name: "culture",
+  //   hidden: true,
+  //   component: () => import("@/views/service/culture/index.vue"),
+  //   meta: { title: "地名文化", showFather: true ,header:true},
+  //   children: [
+  //     {
+  //       //电子地名文化丛书
+  //       path: "loadcultureCate",
+  //       name: "loadcultureCate",
+  //       component: () => import("@/views/service/culture/loadcultureCate/index.vue"),
+  //       meta: { title: "电子地名文化丛书", showFather: false },
+  //     },
+  //     {
+  //       //电子图集挂图
+  //       path: "loadPhotos",
+  //       name: "loadPhotos",
+  //       component: () => import("@/views/service/culture/loadPhotos/index.vue"),
+  //       meta: { title: "电子图集挂图", showFather: false },
+  //     },
+  //     {
+  //       //地名故事影音
+  //       path: "loadVedio",
+  //       name: "loadVedio",
+  //       component: () => import("@/views/service/culture/loadVedio/index.vue"),
+  //       meta: { title: "地名故事影音", showFather: false },
+  //     },
+  //     {
+  //       //古镇古村地名文化
+  //       path: "villagesnames",
+  //       name: "villagesnames",
+  //       component: () => import("@/views/service/culture/villagesnames/index.vue"),
+  //       meta: { title: "古镇、古村地名文化", showFather: false },
+  //     },
+  //     {
+  //       //文化遗产目录
+  //       path: "heritageView",
+  //       name: "heritageView",
+  //       component: () => import("@/views/service/culture/villagesnames/index.vue"),
+  //       meta: { title: "文化遗产目录", showFather: false },
+  //     },
+  //   ],
+  //   hidden: true,
+  // },
+  // {
+  //   //区划演变
+  //   path: "/region",
+  //   name: "region",
+  //   component: () => import("@/views/service/regionView/index.vue"),
+  //   meta:{title:"区划演变",header:true}
+  // },
+  // {
+  //   //政策咨询
+  //   path: "/policy",
+  //   name: "policy",
+  //   component: () => import("@/views/service/policy/index.vue"),
+  //   meta:{title:'政策咨询', showFather: true,header:true},
+  //   children: [
+  //     {
+  //       //详情查看
+  //       path: "policyDetail",
+  //       name: "policyDetail",
+  //       component: () => import("@/views/service/policy/detail/index.vue"),
+  //       meta: { title: "详情查看", showFather: false },
+  //     },
+  //   ],
+  // },
+  // {
+  //   //公众互动
+  //   path: "/public",
+  //   name: "public",
+  //   component: () => import("@/views/service/publicView/index.vue"),
+  //   meta:{title:"公众互动",header:true}
+  // },
+
+  // {
+  //   path: "/searchload",
+  //   component: () => import("@/views/service/searchLoad/index.vue"),
+  //   hidden: true,
+  // },
+  // // {
+  // //   path: "/register",
+  // //   component: () => import("@/views/service/register"),
+  // //   hidden: true,
+  // // },
+  // {
+  //   path: "/placeName",
+  //   component: () => import("@/views/service/placeName/index.vue"),
+  //   hidden: true,
+  // },
   {
     path: "/404",
     component: () => import("@/views/error/404"),
@@ -157,7 +160,7 @@ export const constantRoutes = [
   {
     path: "",
     component: Layout,
-    redirect: "login",
+    redirect: "index",
     children: [
       // {
       //   path: "/login",
@@ -173,20 +176,20 @@ export const constantRoutes = [
       },
     ],
   },
-  // {
-  //   path: '/user',
-  //   component: Layout,
-  //   hidden: true,
-  //   redirect: 'noredirect',
-  //   children: [
-  //     {
-  //       path: 'profile',
-  //       component: () => import('@/views/system/user/profile/index'),
-  //       name: 'Profile',
-  //       meta: { title: '个人中心', icon: 'user' }
-  //     }
-  //   ]
-  // }
+  {
+    path: '/user',
+    component: Layout,
+    hidden: true,
+    redirect: 'noredirect',
+    children: [
+      {
+        path: 'profile',
+        component: () => import('@/views/system/user/profile/index'),
+        name: 'Profile',
+        meta: { title: '个人中心', icon: 'user' }
+      }
+    ]
+  }
 ];
 
 // 动态路由，基于用户权限动态去加载
@@ -269,13 +272,13 @@ let routerPush = Router.prototype.push;
 
 let routerReplace = Router.prototype.replace;
 // push
-// Router.prototype.push = function push(location) {
-//   return routerPush.call(this, location)
-// }
-// // replace
-// Router.prototype.replace = function push(location) {
-//   return routerReplace.call(this, location)
-// }
+Router.prototype.push = function push(location) {
+  return routerPush.call(this, location)
+}
+// replace
+Router.prototype.replace = function push(location) {
+  return routerReplace.call(this, location)
+}
 
 export default new Router({
   mode: "history", // 去掉url中的#

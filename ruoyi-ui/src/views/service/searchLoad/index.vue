@@ -1,6 +1,6 @@
 <template>
   <div class="_container">
-    <el-row v-if="dataList.header">
+    <el-row  v-if="dataList.header">
       <i class="el-icon-back cur position_img_left" @click="goBack">返回</i>
       <i class="el-icon-view cur position_img_right" @click="handleImage"
         >实景</i
@@ -14,16 +14,16 @@
         />
       </el-col>
     </el-row>
-    <div style="background-color: rgb(240, 248, 254);overflow:auto;">
+    <div style="background-color: rgb(240, 248, 254);overflow:auto;height:40vh">
       <div class="flex_align" style="justify-content: space-between">
         <h3 style="font-weight:700">{{ dataList.name }}</h3>
           <i class="el-icon-thumb">点赞（10）</i>
       </div>
       <div style="padding: 0 20px 10px 20px">
         <p>地址：{{ dataList.address }}</p>
-        <p>类别名称：{{ dataList.name1 }}</p>
+        <!-- <p>类别名称：{{ dataList.name1 }}</p>
         <p>所属街道：{{ dataList.jiedao }}</p>
-        <p>数据来源：{{ dataList.laiyuan }}</p>
+        <p>数据来源：{{ dataList.laiyuan }}</p> -->
         <p>备注：{{ dataList.jianjie }}</p>
       </div>
       <div class="imgs">
@@ -40,6 +40,9 @@ export default {
   props: ["dataList"],
   data() {
     return {};
+  },
+  mounted(){
+    console.log(this.$props.dataList)
   },
   methods: {
     handleImage() {

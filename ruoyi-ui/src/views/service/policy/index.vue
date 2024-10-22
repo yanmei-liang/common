@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div v-show="$route.meta.showFather">
+    <div>
       <div class="header">
         <img src="../../../assets/images/zhengcezixun.png" alt="" />
       </div>
@@ -22,14 +22,13 @@
                 </div>
               </div>
               <ul>
-                <li v-for="o in 4" :key="o" class="text">
-                  <div style="display: flex; position: relative">
-                    <span class="content_font" @click="handleClick(o)">{{
-                      "《求是》杂志发表习近平总书记重要文章《在党的二十届三中全会第二次全体会议上的讲话》 " +
-                      o
+                <li v-for="item in newsList" :key="item" class="text">
+                  <div v-if="item.isshow=='是'?true:false" style="display: flex; position: relative">
+                    <span class="content_font" @click="handleClick(item)">{{
+                      item.title
                     }}</span>
                     <div style="position: absolute; right: 0">
-                      <span style="margin-right: 8vw">新华社</span>
+                      <span style="margin-right: 8vw">{{item.resource}}</span>
                       <span>2024-09-20</span>
                     </div>
                   </div>
@@ -44,21 +43,50 @@
       <Pagination :total="100" />
     </div>
 
-    <router-view  v-show="$route.meta.showFather" />
+    <router-view v-show="$route.meta.showFather" />
   </div>
 </template>
 <script>
+import {
+  listNews,
+  getNews,
+  delNews,
+  addNews,
+  updateNews,
+} from "@/api/system/news";
 import Pagination from "@/components/Pagination/index.vue";
 export default {
   components: { Pagination },
   data() {
     return {
       activeName: "first",
+      // 查询参数
+      queryParams: {
+        pageNum: 1,
+        pageSize: 10,
+        title: null,
+        resource: null,
+        resourceurl: null,
+        content: null,
+        isshow: null,
+        createuer: null,
+        createtime: null,
+        isdel: null,
+      },
+      newsList:[]
     };
+  },
+  mounted() {
+    listNews(this.queryParams).then((res) => {
+      console.log(res.rows)
+      this.newsList = res.rows;
+      // this.total = response.total;
+      // this.loading = false;
+    });
   },
   methods: {
     handleClick(val) {
-      this.$router.push({ path: "policy/policyDetail" });
+      this.$router.push({ path: "policyDetail",query:val });
     },
   },
 };

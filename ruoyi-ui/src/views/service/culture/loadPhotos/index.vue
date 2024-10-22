@@ -1,16 +1,23 @@
 <template>
   <div class="container">
     <div class="breadcrumb">
-       <Breadcrumb />
+      <Breadcrumb />
     </div>
     <el-carousel
       arrow="always"
       trigger="click"
-      style="width: 100%; height: 800px"
+      style="width: 100%"
+      :autoplay="false"
+      ref="carouselRef"
     >
-      <!-- <el-carousel-item v-for="item in 4" height="800px" :key="item"> -->
-      <div id="mapDiv"></div>
-      <!-- </el-carousel-item> -->
+      <el-carousel-item
+        v-for="item in cardContent"
+        height="800px"
+        :key="item.id"
+      >
+        <img :src="item.mainimg" alt="" />
+        <!-- <div id="mapDiv"></div> -->
+      </el-carousel-item>
     </el-carousel>
 
     <div class="carousel" v-show="!setMap">
@@ -18,11 +25,8 @@
         <i class="el-icon-arrow-down" @click="() => (setMap = !setMap)"></i>
       </div>
       <div class="img_list">
-        <div v-for="item in 6" :key="item">
-          <img
-            src="http://api.tianditu.gov.cn/staticimage?center=116.40,39.93&width=500&height=500&zoom=13&layers= ter_c,cta_c&tk=525ecf8803a6268acc612ba1ae3e3065"
-            alt=""
-          />
+        <div v-for="item,index in cardContent" :key="item.id">
+          <img @click="handleClickImg(index)" :src="item.mainimg" alt="" />
         </div>
       </div>
     </div>
@@ -36,18 +40,46 @@
 <script>
 import Axios from "axios";
 import Breadcrumb from "@/components/Breadcrumb/index.vue";
+import {
+  listMedia,
+  getMedia,
+  delMedia,
+  addMedia,
+  updateMedia,
+} from "@/api/system/media";
 export default {
-  components:{Breadcrumb},
+  components: { Breadcrumb },
   data() {
     return {
       setMap: false,
+      queryParams: {
+        pageNum: 1,
+        pageSize: 10,
+        type: null,
+        name: null,
+        author: null,
+        area: null,
+        mainimg: null,
+        content: null,
+        isshow: null,
+        createuer: null,
+        createtime: null,
+        isdel: null,
+      },
+      cardContent: null,
     };
   },
   mounted() {
-    const m =
-      "http://api.tianditu.gov.cn/staticimage?center=116.40,39.93&width=400&height=300&zoom=10&layers=vec_c,eva_c&tk=525ecf8803a6268acc612ba1ae3e3065";
-    Axios.get(m).then((res) => {
-      console.log(res);
+    // const m =
+    //   "http://api.tianditu.gov.cn/staticimage?center=116.40,39.93&width=400&height=300&zoom=10&layers=vec_c,eva_c&tk=525ecf8803a6268acc612ba1ae3e3065";
+    // Axios.get(m).then((res) => {
+    //   console.log(res);
+    // });
+
+    const data = { ...this.queryParams, type: "电子图集" };
+    listMedia(data).then((res) => {
+      console.log(res.rows);
+      this.cardContent = res.rows;
     });
 
     var map;
@@ -79,25 +111,26 @@ export default {
     line.addEventListener("click", this.LineClick);
   },
   methods: {
-    getCarousel(value) {
-      console.log(value);
+    handleClickImg(value) {
+      const carousel = this.$refs.carouselRef;
+      carousel.setActiveItem(value);
     },
   },
 };
 </script>
-<style scoped>
-
+<style scoped lang="scss">
 .img_list {
   display: flex;
   align-items: center;
   /* justify-content: space-around; */
   overflow: auto;
+  img {
+    width: 200px;
+    height: 150px;
+    margin: 0 20px;
+  }
 }
-img {
-  width: 200px;
-  height: 150px;
-  margin: 0 20px;
-}
+
 .carousel {
   position: absolute;
   bottom: 50px;
@@ -146,7 +179,8 @@ img {
   width: 50px;
   height: 50px;
 }
-.breadcrumb{
+.breadcrumb {
   border-radius: 10px;
+  top: 10vh;
 }
 </style>

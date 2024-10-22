@@ -1,31 +1,31 @@
 <template>
   <div class="container">
-    <el-row>
-      <el-col
-        :span="7"
-        v-for="(o, index) in 13"
-        :key="o"
-        :offset="index % 3 ? 1 : 0"
+    <el-row :gutter="20">
+      <el-col  style="margin:10px 0"
+        :span="8"
+        v-for="item in card"
+        :key="item"
       >
-        <el-card class="cur"
+        <el-card
+          class="cur"
           :body-style="{ padding: '0px', display: 'flex', height: '240px' }"
         >
-          <img  @click="handSetRead(o)"
-            src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+          <img
+            v-if="item.mainimg"
+            @click="handSetRead(item)"
+            :src="dataImg(item.mainimg)"
             class="image"
-         
+          />
+          <img
+            v-else
+            @click="handSetRead(item)"
+            src="@/assets/images/tupian.webp"
+            class="image"
           />
           <div>
-            <h4>十堰市电子地名实录</h4>
-            <p>作者：李大海</p>
-            <span
-              >简介："十堰电子地名丛书涵盖了十堰市及其所辖县（市区）、乡镇（街道）、社区（村）等各类行政区划名称，以及公路、街巷、桥梁、隧道、车站、",</span
-            >
-            <!-- <span>好吃的汉堡</span>
-            <div class="bottom clearfix">
-              <time class="time">{{ currentDate }}</time>
-              <el-button type="text" class="button">操作按钮</el-button>
-            </div> -->
+            <h4>{{ item.name }}</h4>
+            <p>作者：{{ item.author }}</p>
+            <span>简介：{{ item.content }} </span>
           </div>
         </el-card>
       </el-col>
@@ -38,13 +38,19 @@ export default {
   data() {
     return {};
   },
-  computed: {},
+  computed: {
+  
+  },
   methods: {
     handSetRead(value) {
-       this.$router.push({path:'/culture/loadPhotos'})
-      console.log(value)
+      // this.$router.push({ path: "/loadPhotos" });
+      console.log(value);
       // console.log('1111',value);
     },
+      dataImg(val){
+        console.log(val.split('.jpg')[0]+'.jpg')
+        return val.split('.jpg')[0]+'.jpg'
+    }
   },
 };
 </script>

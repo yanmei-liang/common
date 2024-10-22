@@ -12,27 +12,53 @@
 </template>
 <script>
 import LoadcultureCate from "../../loadcultureCate copy/index.vue";
+import {
+  listMedia,
+  getMedia,
+  delMedia,
+  addMedia,
+  updateMedia,
+} from "@/api/system/media";
 export default {
   components: { LoadcultureCate },
   data() {
-    return {};
+    return {
+      queryParams: {
+        pageNum: 1,
+        pageSize: 10,
+        type: null,
+        name: null,
+        author: null,
+        area: null,
+        mainimg: null,
+        content: null,
+        isshow: null,
+        createuer: null,
+        createtime: null,
+        isdel: null,
+      },
+    };
   },
   created() {},
   mounted() {
-    console.log();
+    
+    const data = { ...this.queryParams, type: "故事影音" };
+    listMedia(data).then((res) => {
+      console.log(this.queryParams,res.rows,data);
+      this.cardContent = res.rows;
+    });
   },
   watch: {},
   methods: {},
 };
 </script>
 <style scoped>
-.imgfont{
+.imgfont {
   width: 100%;
   position: absolute;
   bottom: 20px;
   z-index: 999;
   color: #ffffff;
- 
 }
 .moudle_child {
   width: 400px;
@@ -49,6 +75,5 @@ img {
   width: 100%;
   height: 100%;
   padding: 10px;
-
 }
 </style>

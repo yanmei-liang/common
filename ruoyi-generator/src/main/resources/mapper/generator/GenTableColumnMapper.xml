@@ -40,10 +40,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="selectDbTableColumnsByName" parameterType="String" resultMap="GenTableColumnResult">
-		select column_name, (case when (is_nullable = 'no' <![CDATA[ && ]]> column_key != 'PRI') then '1' else '0' end) as is_required, (case when column_key = 'PRI' then '1' else '0' end) as is_pk, ordinal_position as sort, column_comment, (case when extra = 'auto_increment' then '1' else '0' end) as is_increment, column_type
-		from information_schema.columns where table_schema = (select database()) and table_name = (#{tableName})
+        SELECT column_name,
+               CASE WHEN is_nullable = 'NO' AND column_name NOT IN (SELECT column_name FROM information_schema.key_column_usage WHERE table_catalog = current_database() AND table_schema = 'public' AND constraint_name LIKE '%_pkey') THEN '1' ELSE NULL END AS is_required,
+               CASE WHEN column_name IN (SELECT column_name FROM information_schema.key_column_usage WHERE table_catalog = current_database() AND table_schema = 'public' AND constraint_name LIKE '%_pkey') THEN '1' ELSE '0' END AS is_pk,
+               ordinal_position AS sort,
+               (SELECT description FROM pg_description WHERE objoid = (SELECT oid FROM pg_class WHERE relname = #{tableName}) AND objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_name = #{tableName} AND column_name = 'column_name')) AS column_comment,
+               CASE WHEN attnum = (SELECT attnum FROM pg_attribute WHERE attrelid = (SELECT oid FROM pg_class WHERE relname = #{tableName}) AND attname = 'column_name') AND attidentity = 'a' THEN '1' ELSE '0' END AS is_increment,
+               data_type AS column_type
+        FROM information_schema.columns
+                 JOIN pg_attribute ON (attrelid = (SELECT oid FROM pg_class WHERE relname = #{tableName}) AND attname = column_name)
+        WHERE table_catalog = current_database() AND table_schema = 'public' and table_name = (#{tableName})
 		order by ordinal_position
-	</select>
+</select>
 
     <insert id="insertGenTableColumn" parameterType="GenTableColumn" useGeneratedKeys="true" keyProperty="columnId">
         insert into gen_table_column (
@@ -85,7 +93,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="dictType != null and dictType != ''">#{dictType},</if>
 			<if test="sort != null">#{sort},</if>
 			<if test="createBy != null and createBy != ''">#{createBy},</if>
-			sysdate()
+			now()
          )
     </insert>
 
@@ -105,7 +113,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="dictType != null">dict_type = #{dictType},</if>
             <if test="sort != null">sort = #{sort},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>
-            update_time = sysdate()
+            update_time = now()
         </set>
         where column_id = #{columnId}
     </update>

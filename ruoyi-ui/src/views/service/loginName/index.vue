@@ -160,6 +160,7 @@ export default {
       },
       lately: [],
       map: null,
+      zoom: 12,
     };
   },
 
@@ -172,6 +173,8 @@ export default {
   mounted() {},
   methods: {
     handleBlert(val) {
+      this.map.clearOverLays();
+
       this.dataList = {
         id: val.id,
         name: val.name,
@@ -180,18 +183,20 @@ export default {
         header: true,
       };
       this.handleMap([val], val.pointarr.split(","));
+      this.map.enableDrag();
       this.currentComponent = "searchLoad";
       this.queryPlaceVal = true;
       this.btn = false;
     },
     handleAlert(val) {
-      document
-        .getElementById("mainDIV")
-        .removeChild(document.getElementById("mapDiv"));
-      var div = document.createElement("div");
-      div.id = "mapDiv";
-      // 重新添加子元素
-      document.getElementById("mainDIV").appendChild(div);
+      this.map.clearOverLays();
+      // document
+      //   .getElementById("mainDIV")
+      //   .removeChild(document.getElementById("mapDiv"));
+      // var div = document.createElement("div");
+      // div.id = "mapDiv";
+      // // 重新添加子元素
+      // document.getElementById("mainDIV").appendChild(div);
       this.message = {
         value: val.name,
       };
@@ -199,10 +204,10 @@ export default {
       let zoom = 10;
 
       //初始化地图对象
-      map = new T.Map("mapDiv");
+      // map = new T.Map("mapDiv");
 
       //设置显示地图的中心点和级别
-      map.centerAndZoom(
+      this.map.centerAndZoom(
         new T.LngLat(
           JSON.parse(val.pointarr).center[0],
           JSON.parse(val.pointarr).center[1]
@@ -229,19 +234,19 @@ export default {
         color: "blue",
         weight: 3,
         opacity: 0.5,
-        fillColor: "#FFFFFF",
+        fillColor: "#6778a5",
         fillOpacity: 0.5,
-        lineStyle:'dashed'
+        lineStyle: "dashed",
       });
       //向地图上添加面
-      map.addOverLay(polygon);
+      this.map.addOverLay(polygon);
 
       // console.log(points)
       // //创建线对象
       // var line = new T.Polyline(points);
       // //向地图上添加线
       // map.addOverLay(line);
-      map.enableDrag();
+      this.map.enableDrag();
       this.dataList = {
         id: val.id,
         name: val.name,
@@ -292,11 +297,13 @@ export default {
       const arr = this.points.filter((item) => {
         return item.dicType == val;
       });
+      this.map.clearOverLays();
 
       this.dataList = arr;
       this.btn = false;
       this.queryPlaceVal = false;
       this.handleMap(arr);
+      this.map.enableDrag();
       this.currentComponent = "placeName";
     },
     onLoad() {
@@ -315,15 +322,13 @@ export default {
         .catch((err) => {});
     },
     handleMap(val, center) {
-      // console.log(val, center);
       const arr = [];
       val.forEach((item) => {
         if (!!item.pointarr && !!item.name) {
           arr.push([...item.pointarr.split(","), item.name]);
         }
       });
-      var map;
-      var zoom = 12;
+      // var zoom = 12;
       var data_info = arr;
 
       this.map = new T.Map("mapDiv", {
@@ -331,12 +336,12 @@ export default {
       });
       //  map.removeChild(document.getElementById("mapDiv"));
       if (!!center) {
-        this.map.centerAndZoom(new T.LngLat(center[0], center[1]), zoom);
+        this.map.centerAndZoom(new T.LngLat(center[0], center[1]), this.zoom);
       } else {
-        this.map.centerAndZoom(new T.LngLat(110.8065, 32.62129), zoom);
+        this.map.centerAndZoom(new T.LngLat(110.8065, 32.62129), this.zoom);
       }
 
-      // this.map.enableDrag();
+      this.map.enableDrag();
 
       for (var i = 0; i < data_info.length; i++) {
         var marker = new T.Marker(

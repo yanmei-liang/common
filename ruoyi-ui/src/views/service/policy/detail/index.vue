@@ -31,7 +31,9 @@ export default {
 </script>
 <style scoped lang="scss">
 .container{
-  overflow: auto;
+  overflow: hidden;
+   margin-top: 6vh;
+   margin-bottom: 15vh;
 }
 .pos {
   height: 80px;

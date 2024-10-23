@@ -170,7 +170,7 @@ export const constantRoutes = [
       // },
       {
         path: "index",
-        component: () => import("@/views/index"),
+        component: () => import("@/views/service/loginName"),
         name: "Index",
         meta: { title: "首页", icon: "dashboard", affix: true },
       },

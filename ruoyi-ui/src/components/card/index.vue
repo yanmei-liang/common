@@ -7,6 +7,7 @@
         :key="item"
       >
         <el-card
+        v-if="!item.isshow"
           class="cur"
           :body-style="{ padding: '0px', display: 'flex', height: '240px' }"
         >

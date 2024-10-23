@@ -94,7 +94,7 @@
                 </configuration>
            </plugin>
         </plugins>
-        <finalName>${project.artifactId}</finalName>
+        <finalName>ruyi-common</finalName>
     </build>
 
 </project>

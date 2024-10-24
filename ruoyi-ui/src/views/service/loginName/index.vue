@@ -161,6 +161,7 @@ export default {
       lately: [],
       map: null,
       zoom: 12,
+      marker: "",
     };
   },
 
@@ -275,10 +276,12 @@ export default {
       if (!!value && value != "") {
         const query = { ...this.queryParams, name: value };
         listDm(query).then((res) => {
+          console.log("打印", res);
           this.currentComponent = "placeName";
           this.dataList = res.rows;
           this.btn = false;
           this.queryPlaceVal = true;
+          this.handleMap(res.rows);
         });
       }
     },
@@ -322,6 +325,7 @@ export default {
         .catch((err) => {});
     },
     handleMap(val, center) {
+      // removeMarkerClick();
       const arr = [];
       val.forEach((item) => {
         if (!!item.pointarr && !!item.name) {
@@ -330,10 +334,12 @@ export default {
       });
       // var zoom = 12;
       var data_info = arr;
+      if (!this.map) {
+        this.map = new T.Map("mapDiv", {
+          projection: "EPSG:4326",
+        });
+      }
 
-      this.map = new T.Map("mapDiv", {
-        projection: "EPSG:4326",
-      });
       //  map.removeChild(document.getElementById("mapDiv"));
       if (!!center) {
         this.map.centerAndZoom(new T.LngLat(center[0], center[1]), this.zoom);
@@ -346,7 +352,9 @@ export default {
       for (var i = 0; i < data_info.length; i++) {
         var marker = new T.Marker(
           new T.LngLat(data_info[i][0], data_info[i][1])
-        ); // 创建标注
+        );
+        // 创建标注
+        marker.addEventListener("click", this.MarkerClick);
         var content = data_info[i][2];
         var latlng = new T.LngLat(
           data_info[i][0] - 0.0002,
@@ -362,6 +370,9 @@ export default {
         this.map.addOverLay(marker); // 将标注添加到地图中
       }
     },
+    MarkerClick(e) {
+      console.log(e);
+    },
   },
 };
 </script>
@@ -371,7 +382,7 @@ export default {
   width: 28vw;
   position: absolute;
   left: 50px;
-  top: 15vh;
+  top: 6vh;
   z-index: 999;
 }
 a {
@@ -409,10 +420,10 @@ img {
   display: none;
 }
 .el-main {
-  margin-top: 3vh;
+  // margin-top: 65px;
   padding: 5px;
-  height: 90vh;
-  overflow: hidden;
+  height: 100%;
+  // overflow: hidden;
 }
 ::v-deep .tdt-label.tdt-clickable {
   // transform: translate3d(183px, 288px, 0px) !important;

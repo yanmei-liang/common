@@ -11,6 +11,9 @@
        {{list.content}}
       </p>
     </div>
+    <div style="height:300px;width:100%">
+
+    </div>
   </div>
 </template>
 <script>
@@ -31,9 +34,8 @@ export default {
 </script>
 <style scoped lang="scss">
 .container{
-  overflow: hidden;
-   margin-top: 6vh;
-   margin-bottom: 15vh;
+  overflow: auto;
+  display: block;
 }
 .pos {
   height: 80px;
@@ -44,6 +46,7 @@ export default {
 }
 .content {
     width: 50%;
+    height: 100%;
     margin: 0 auto;
     margin-top: 6vh;
     text-align: center;

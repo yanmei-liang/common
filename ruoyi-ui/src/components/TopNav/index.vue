@@ -174,8 +174,8 @@ export default {
   float: left;
   height: 50px !important;
   line-height: 50px !important;
-  color: #999093 !important;
-  padding: 0 5px !important;
+  color: white;
+  padding: 0 20px !important;
   margin: 0 10px !important;
 }
 

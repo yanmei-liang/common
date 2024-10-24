@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
+    <!-- <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" /> -->
 
     <breadcrumb id="breadcrumb-container" class="breadcrumb-container" v-if="!topNav"/>
     <top-nav id="topmenu-container" class="topmenu-container" v-if="topNav"/>
@@ -112,12 +112,17 @@ export default {
 
 <style lang="scss" scoped>
 .navbar {
-  height: 50px;
+  height: 100%;
   overflow: hidden;
   position: relative;
   background: #fff;
   box-shadow: 0 1px 4px rgba(0,21,41,.08);
-
+   background-image: url("../shiyanLogo.png");
+   background-size: cover;
+   background-position-y: -130px;
+   display: flex;
+   align-items: center;
+   justify-content: flex-end;
   .hamburger-container {
     line-height: 46px;
     height: 100%;
@@ -137,7 +142,15 @@ export default {
 
   .topmenu-container {
     position: absolute;
-    left: 50px;
+    left: 20%;
+    // height: 120px;
+    // display: flex;
+    // align-items: center;
+    top: 68px;
+  
+    // transform: translate(-50%);
+    background-color: rgba(255,255,255,0);
+    
   }
 
   .errLog-container {
@@ -148,7 +161,7 @@ export default {
   .right-menu {
     float: right;
     height: 100%;
-    line-height: 50px;
+    line-height: 120px;
 
     &:focus {
       outline: none;

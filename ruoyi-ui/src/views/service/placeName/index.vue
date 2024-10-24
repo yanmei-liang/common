@@ -93,7 +93,7 @@ export default {
   },
   methods: {
     handleChange(val) {
-      // console.log(this.arrList);
+     
       if (val != "全部市辖区") {
        this.arrList = this.$props.dataList.filter((item) => {
           const pattern = new RegExp(val, "i");
@@ -104,6 +104,7 @@ export default {
       }else{
         this.arrList = this.$props.dataList
       }
+       console.log(this.arrList);
     },
     goBack() {
       const value = {

@@ -101,6 +101,7 @@ export default {
 </script>
 <style scoped lang="scss">
 .container {
+  
   background-image: url("~@/assets/images/login-background.jpg");
   background-size: cover;
 }
@@ -140,6 +141,6 @@ span {
 .pos {
   position: absolute;
   right: 100px;
-  top: 8vw;
+  top: 5vh;
 }
 </style>

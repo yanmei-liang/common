@@ -46,7 +46,7 @@ export default {
 .container {
   display: block;
   margin-top: 10px;
-  height: calc(100vh - 94px);
+  // height: calc(100vh - 94px);
   background-color: #f2f2f2;
   .header {
     width: 100%;

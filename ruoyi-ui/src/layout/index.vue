@@ -3,7 +3,7 @@
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside"/>
     <sidebar v-if="!sidebar.hide" class="sidebar-container"/>
     <div :class="{hasTagsView:needTagsView,sidebarHide:sidebar.hide}" class="main-container">
-      <div :class="{'fixed-header':fixedHeader}">
+      <div class="_fixed_header" :class="{'fixed-header':fixedHeader}">
         <navbar/>
         <tags-view v-if="needTagsView"/>
       </div>
@@ -71,7 +71,7 @@ export default {
     position: relative;
     height: 100%;
     width: 100%;
-
+    overflow: hidden;
     &.mobile.openSidebar {
       position: fixed;
       top: 0;
@@ -98,7 +98,7 @@ export default {
   }
 
   .hideSidebar .fixed-header {
-    width: calc(100% - 54px);
+    width: calc(100% - 124px);
   }
 
   .sidebarHide .fixed-header {
@@ -107,5 +107,9 @@ export default {
 
   .mobile .fixed-header {
     width: 100%;
+  }
+  ._fixed_header{
+   height: 120px;
+
   }
 </style>

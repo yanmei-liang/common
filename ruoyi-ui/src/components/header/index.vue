@@ -151,7 +151,7 @@ export default {
 .header_img {
   width: 100%;
   height: 20vh;
-  background-image: url("../../assets/images/shiyanLogo.png");
+  // background-image: url("../../assets/images/shiyanLogo.png");
   background-size: cover;
   background-position: 0 -130px;
   position: relative;

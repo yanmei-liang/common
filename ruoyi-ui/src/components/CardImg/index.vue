@@ -35,9 +35,9 @@
               {{ item.address }}
             </p>
           </el-col>
-          <el-col :span="8" class="col1">
+          <el-col :span="8" style="width:120px;" class="col1">
             <!-- {{item.img}} -->
-            <div  v-if="!!item.imgurl">
+            <div   v-if="!!item.imgurl">
               <img style="width:120px;height:80px" :src="item.imgurl" alt="" />
               <div class="readImg" @click="handRead(item)">查看图片</div>
             </div>

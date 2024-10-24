@@ -123,7 +123,7 @@ export default {
   display: flex;
   align-items: center;
   /* justify-content: space-around; */
-  overflow: auto;
+  // overflow: auto;
   img {
     width: 200px;
     height: 150px;
@@ -181,6 +181,6 @@ export default {
 }
 .breadcrumb {
   border-radius: 10px;
-  top: 10vh;
+  top: 0vh;
 }
 </style>

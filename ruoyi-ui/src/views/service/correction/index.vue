@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div style="overflow:auto">
     <div class="header_img">
       <span style="margin-left: 50px"> 地名监督纠错</span>
     </div>
@@ -81,7 +81,7 @@ export default {
       },
       map:'',
       marker:'',
-      zoom:12,
+      zoom:14,
     };
   },
   mounted(){
@@ -96,8 +96,8 @@ export default {
       //初始化地图对象
       this.map = new T.Map("mapDiv");
       //设置显示地图的中心点和级别
-      this.map.centerAndZoom(new T.LngLat(116.40093, 39.90313), this.zoom);
-      var point = new T.LngLat(116.400244, 39.92556);
+      this.map.centerAndZoom(new T.LngLat(110.8065, 32.62129), this.zoom);
+      var point = new T.LngLat(110.8065, 32.62129);
       this.marker = new T.Marker(point); // 创建标注
       this.map.addOverLay(this.marker); // 将标注添加到地图中
       this.marker.disableDragging(); // 不可拖拽

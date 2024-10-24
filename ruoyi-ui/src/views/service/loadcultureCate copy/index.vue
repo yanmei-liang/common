@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <el-container style="width: 100%; height: 90vh !important">
+    <el-container>
       <el-container class="filter-tree">
         <el-aside width="200px">
           <el-tree
@@ -102,18 +102,12 @@ export default {
   border-width: 0px;
   position: absolute;
   left: 0px;
-  top:50px;
+  top:0px;
   width: 100%;
   height: 10vh;
-  background: inherit;
   background-color: rgba(51, 51, 51, 0.368627450980392);
-  border: none;
-  border-radius: 0px;
-  -moz-box-shadow: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
   z-index: 999;
-  margin: 0 20px;
+  /* margin: 0 20px; */
   background-color: rgba(242, 242, 242, 0.996078431372549);
 }
 .pos_header {
@@ -142,8 +136,7 @@ export default {
 }
 .filter-tree {
   margin-top: 22vh;
-  margin-bottom: 10vh;
-  height: 80vh;
+  height:calc( 78vh - 120px);
 }
 .breadcrumb_left {
   font-size: 20px;

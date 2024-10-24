@@ -94,11 +94,12 @@
   margin: 0 !important;
 }
 .container {
-  height: calc(100vh - 60px);
+  height:100%;
   padding: 0;
   // margin: 0 20px;
   display: flex;
   flex-grow: 1;
+  // overflow: auto;
 }
 #mapDiv {
   width: 100%;

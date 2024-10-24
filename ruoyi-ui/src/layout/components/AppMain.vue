@@ -30,8 +30,6 @@ export default {
 .app-main {
   /* 50= navbar  50  */
   height: calc(100vh - 120px);
-  // height: 100vh;
-  margin-top:120px;
   width: 100%;
   position: relative;
   overflow: auto;

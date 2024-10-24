@@ -10,12 +10,8 @@
       :autoplay="false"
       ref="carouselRef"
     >
-      <el-carousel-item
-        v-for="item in cardContent"
-        height="800px"
-        :key="item.id"
-      >
-        <img :src="item.mainimg" alt="" />
+      <el-carousel-item v-for="item in cardContent" :key="item.id">
+        <img style=" height:500px" :src="item.mainimg" alt="" />
         <!-- <div id="mapDiv"></div> -->
       </el-carousel-item>
     </el-carousel>
@@ -25,7 +21,7 @@
         <i class="el-icon-arrow-down" @click="() => (setMap = !setMap)"></i>
       </div>
       <div class="img_list">
-        <div v-for="item,index in cardContent" :key="item.id">
+        <div v-for="(item, index) in cardContent" :key="item.id">
           <img @click="handleClickImg(index)" :src="item.mainimg" alt="" />
         </div>
       </div>
@@ -130,15 +126,20 @@ export default {
     margin: 0 20px;
   }
 }
-
 .carousel {
   position: absolute;
   bottom: 50px;
   left: 20%;
-  width: 60%;
+  width: 60vw;
   height: 200px;
   background-color: rgba(85, 85, 85, 0.552941176470588);
   z-index: 999;
+  overflow: auto;
+}
+.el-carousel__item{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .el-carousel__item h3 {
   color: #475669;

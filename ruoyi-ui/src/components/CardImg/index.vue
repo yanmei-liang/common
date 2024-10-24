@@ -35,10 +35,14 @@
               {{ item.address }}
             </p>
           </el-col>
-          <el-col :span="8" style="width:120px;" class="col1">
+          <el-col :span="8" style="width: 120px" class="col1">
             <!-- {{item.img}} -->
-            <div   v-if="!!item.imgurl">
-              <img style="width:120px;height:80px" :src="item.imgurl" alt="" />
+            <div v-if="!!item.imgurl">
+              <img
+                style="width: 120px; height: 80px"
+                :src="item.imgurl"
+                alt=""
+              />
               <div class="readImg" @click="handRead(item)">查看图片</div>
             </div>
             <div v-else>
@@ -59,9 +63,9 @@
       :modal="false"
     >
       <el-row style="display: flex; align-items: center">
-        <el-col :span="12" style="display: flex; align-items: center;">
+        <el-col :span="12" style="display: flex; align-items: center">
           <h1>{{ dataTitle }}</h1>
-          <el-button type="primary" @click="handImg" style="margin-left:30px">
+          <el-button type="primary" @click="handImg" style="margin-left: 30px">
             <!-- <img
               style="width: 25px; padding: 5px"
               src="../../assets/images/5.png"
@@ -104,24 +108,26 @@ export default {
       dialogVisible: false,
       dataList: null,
       dataTitle: "",
-      dataImg:""
+      dataImg: "",
     };
   },
-  mounted(){
-  },
+  mounted() {},
   methods: {
     handRead(val) {
+      // console.log("val", val);
+      const { name, pointarr, content, address } = val;
       this.dataList = {
         header: false,
-        name: val.name,
-        address: val.address,
+        name,
+        address,
         // name1: "事件纪念地现今地名",
         // jiedao: "永乐街道",
         // laiyuan: "实地调查",
-        jianjie: val.content,
+        jianjie: content,
+        pointarr,
       };
       this.dataTitle = val.name;
-      this.dataImg = val.imgurl
+      this.dataImg = val.imgurl;
       // this.$router.replace('https://vr.baidu.com/vrcc/pano-share.html?shareId=share_9c47e87f9')
       this.dialogVisible = true;
     },
@@ -202,7 +208,7 @@ img {
 ::v-deep .el-dialog__headerbtn {
   font-size: 40px;
 }
-.imgurl{
+.imgurl {
   width: 70vw;
   // height: 70vh;
 }

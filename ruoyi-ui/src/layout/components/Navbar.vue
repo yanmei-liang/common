@@ -2,7 +2,12 @@
   <div class="navbar">
     <!-- <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" /> -->
 
-    <breadcrumb id="breadcrumb-container" class="breadcrumb-container" v-if="!topNav"/>
+    <breadcrumb id="breadcrumb-container" class="breadcrumb-container" v-if="!topNav"/> 
+    <div class="navbar_logo">
+        <img src="../../assets/logo/logo.png" alt="">
+        <span>十堰市行政区划服务平台</span>
+    </div>
+   
     <top-nav id="topmenu-container" class="topmenu-container" v-if="topNav"/>
 
     <div class="right-menu">
@@ -17,7 +22,7 @@
           <ruo-yi-doc id="ruoyi-doc" class="right-menu-item hover-effect" />
         </el-tooltip> -->
 
-        <screenfull id="screenfull" class="right-menu-item hover-effect" />
+        <!-- <screenfull id="screenfull" class="right-menu-item hover-effect" /> -->
 
         <!-- <el-tooltip content="布局大小" effect="dark" placement="bottom">
           <size-select id="size-select" class="right-menu-item hover-effect" />
@@ -25,7 +30,7 @@
 
       </template>
 
-      <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
+      <!-- <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
           <img :src="avatar" class="user-avatar">
           <i class="el-icon-caret-bottom" />
@@ -41,7 +46,7 @@
             <span>退出登录</span>
           </el-dropdown-item>
         </el-dropdown-menu>
-      </el-dropdown>
+      </el-dropdown> -->
     </div>
   </div>
 </template>
@@ -122,7 +127,6 @@ export default {
    background-position-y: -130px;
    display: flex;
    align-items: center;
-   justify-content: flex-end;
   .hamburger-container {
     line-height: 46px;
     height: 100%;
@@ -142,7 +146,7 @@ export default {
 
   .topmenu-container {
     position: absolute;
-    left: 20%;
+    left: 30%;
     // height: 120px;
     // display: flex;
     // align-items: center;
@@ -208,6 +212,17 @@ export default {
         }
       }
     }
+  }
+  .navbar_logo{
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    font-size: 30px;
+    color: white;
+    font-weight: 900;
+  }
+  img{
+    width: 50px;
   }
 }
 </style>

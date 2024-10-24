@@ -1,6 +1,6 @@
 <template>
   <div class="_container">
-    <el-row  v-if="dataList.header">
+    <el-row v-if="dataList.header">
       <i class="el-icon-back cur position_img_left" @click="goBack">返回</i>
       <i class="el-icon-view cur position_img_right" @click="handleImage"
         >实景</i
@@ -14,10 +14,17 @@
         />
       </el-col>
     </el-row>
-    <div style="background-color: rgb(240, 248, 254);overflow:auto;height:40vh">
+    <div
+      style="
+        background-color: rgb(240, 248, 254);
+        overflow: auto;
+        height: 100%;
+        min-height: 78vh;
+      "
+    >
       <div class="flex_align" style="justify-content: space-between">
-        <h3 style="font-weight:700">{{ dataList.name }}</h3>
-          <i class="el-icon-thumb">点赞（10）</i>
+        <h3 style="font-weight: 700">{{ dataList.name }}</h3>
+        <i class="el-icon-thumb">点赞（10）</i>
       </div>
       <div style="padding: 0 20px 10px 20px">
         <p>地址：{{ dataList.address }}</p>
@@ -28,23 +35,28 @@
       </div>
       <div class="imgs">
         <slot></slot>
+        <supervision @handleCorrection="handleCorrection" />
       </div>
     </div>
-  
   </div>
 </template>
 <script>
 import searchLoad from "../loginName/index.vue";
+import supervision from "../../../components/supervision/index";
 export default {
-  components: {},
+  components: { supervision },
   props: ["dataList"],
   data() {
-    return {};
+    return {
+      dataSet:[]
+    };
   },
-  mounted(){
-    console.log(this.$props.dataList)
-  },
+  mounted() {},
   methods: {
+    handleCorrection() {
+      // console.log(this.$props.dataList);
+      this.$router.push({ name: "Correction" ,params:{dataList:this.$props.dataList}});
+    },
     handleImage() {
       window.open(
         "https://vr.baidu.com/vrcc/pano-share.html?shareId=share_9c47e87f9"
@@ -65,7 +77,7 @@ export default {
   padding: 0 20px;
 }
 ._container {
-  width:28vw;
+  width: 28vw;
   padding: 0;
   margin: 0;
 }
@@ -78,11 +90,11 @@ img {
 p {
   font-size: 12px;
 }
-.imgs{
+.imgs {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  img{
+  img {
     width: 30%;
   }
 }

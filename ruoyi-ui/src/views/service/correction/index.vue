@@ -1,5 +1,5 @@
 <template>
-  <div style="overflow:auto">
+  <div style="overflow: auto">
     <div class="header_img">
       <span style="margin-left: 50px"> 地名监督纠错</span>
     </div>
@@ -19,7 +19,7 @@
             <el-input v-model="form.name"></el-input>
           </el-form-item>
           <el-form-item required label=" 历史沿革">
-            <el-input v-model="form.name"></el-input>
+            <el-input v-model="form.jianjie"></el-input>
           </el-form-item>
           <el-form-item required label=" 地理实体描述">
             <el-input v-model="form.name"></el-input>
@@ -65,6 +65,7 @@
 </template>
 <script>
 import ImageUpload from "@/components/ImageUpload/index";
+import { number } from "echarts";
 export default {
   components: { ImageUpload },
   data() {
@@ -78,26 +79,50 @@ export default {
         type: [],
         resource: "",
         desc: "",
+        pointarr: "",
+        jianjie: "",
       },
-      map:'',
-      marker:'',
-      zoom:14,
+      map: "",
+      marker: "",
+      zoom: 12,
     };
   },
-  mounted(){
-    this.onLoad()
-    this.marker.enableDragging()
+  created() {},
+  mounted() {
+    // console.log(this.$route.params.dataList)
+    // const { dataList } = this.$route.params;
+    // if (!!dataList) {
+    //   this.form = {
+    //     name: dataList.name,
+    //     pointarr: dataList.pointarr,
+    //     jianjie: dataList.jianjie,
+    //   };
+    // }
+    this.$nextTick(() => {
+      this.onLoad();
+       this.marker.enableDragging();
+    });
+
+   
   },
   methods: {
-    onSubmit() {
-      console.log("submit!");
-    },
+    onSubmit() {},
     onLoad() {
       //初始化地图对象
+      const { dataList } = this.$route.params;
+      if (!!dataList) {
+        this.form = {
+          name: dataList.name,
+          pointarr: dataList.pointarr,
+          jianjie: dataList.jianjie,
+        };
+      }
       this.map = new T.Map("mapDiv");
+      // const center = (this.form.pointarr || "110.8065, 32.62129").split(",")
+      // console.log("center",this.map,this.form.pointarr.split(",")[0]);
       //设置显示地图的中心点和级别
-      this.map.centerAndZoom(new T.LngLat(110.8065, 32.62129), this.zoom);
-      var point = new T.LngLat(110.8065, 32.62129);
+      this.map.centerAndZoom(new T.LngLat(116.40769, 39.89945), this.zoom);
+      var point = new T.LngLat(116.40769, 39.89945);
       this.marker = new T.Marker(point); // 创建标注
       this.map.addOverLay(this.marker); // 将标注添加到地图中
       this.marker.disableDragging(); // 不可拖拽

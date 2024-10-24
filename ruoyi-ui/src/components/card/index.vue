@@ -4,9 +4,9 @@
       <el-col  style="margin:10px 0"
         :span="8"
         v-for="item in card"
-        :key="item"
+        :key="item.id"
       >
-        <el-card
+        <el-card 
         v-if="!item.isshow"
           class="cur"
           :body-style="{ padding: '0px', display: 'flex', height: '240px' }"
@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     handSetRead(value) {
-      // this.$router.push({ path: "/loadPhotos" });
+      this.$router.push({ name: "111" ,params:{id:value}});
       console.log(value);
       // console.log('1111',value);
     },

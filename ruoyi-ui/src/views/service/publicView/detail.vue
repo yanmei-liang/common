@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <!-- <div class="pos"> -->
-    <!-- <Breadcrumb /> -->
+    <Breadcrumb />
     <!-- </div> -->
     <div class="content">
       <h1>{{ list.title }}</h1>
